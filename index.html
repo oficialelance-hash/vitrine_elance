@@ -2,313 +2,158 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="theme-color" content="#eee8df">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f2eee8">
 <title>ÉLANCE | Loja Móvel</title>
 <style>
-:root{--cream:#f2eee8;--paper:#fbf9f5;--brown:#49382e;--muted:#8c7b6e;--gold:#b49a72;--ink:#302720;--line:#d8cfc4}
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;font-family:Arial,Helvetica,sans-serif;background:var(--cream);color:var(--brown);overflow:hidden}
-button,select{font:inherit}button{cursor:pointer}
-.app{height:100dvh;display:flex;flex-direction:column;background:linear-gradient(135deg,#f6f2ec,#eae2d8)}
-.top{min-height:66px;display:flex;align-items:center;justify-content:space-between;padding:8px 4vw;border-bottom:1px solid var(--line);gap:16px;flex-shrink:0}
-.brand{font-family:Georgia,serif;letter-spacing:.25em;font-size:clamp(19px,3vw,27px);white-space:nowrap}.brand small{display:block;font:9px Arial;letter-spacing:.19em;margin-top:4px;color:var(--muted)}
-.topright{display:flex;align-items:center;gap:14px;font-size:10px;letter-spacing:.15em;color:var(--muted);text-transform:uppercase;text-align:right}
-.navbtn,.primary,.secondary,.outline{border:0;border-radius:30px;padding:11px 17px;font-size:11px;letter-spacing:.08em}
-.story{margin:0 0 22px;padding:18px 22px;background:#eee7dd;border-left:3px solid var(--gold);max-width:900px}
-.story strong{display:block;font:20px Georgia;font-weight:400;margin-bottom:7px}
-.story p{margin:0;font:13px/1.6 Georgia;color:#76675c}
-.detail-overlay{position:fixed;inset:0;background:#211a16b8;z-index:20;display:none;align-items:center;justify-content:center;padding:18px}
-.detail-overlay.show{display:flex}
-.detail-modal{position:relative;background:var(--paper);width:min(850px,100%);max-height:92dvh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;box-shadow:0 20px 70px #0005}
-.detail-modal img{width:100%;height:100%;min-height:360px;max-height:650px;object-fit:cover;background:#e6ded4}
-.detail-copy{padding:clamp(20px,4vw,42px);display:flex;flex-direction:column;justify-content:center}
-.detail-copy h2{font:clamp(27px,4vw,42px)/1.1 Georgia;font-weight:400;margin:0 0 12px}
-.detail-copy p{font:15px/1.55 Georgia;color:#76675c}
-.detail-close{position:absolute;right:12px;top:12px;width:38px;height:38px;border:1px solid #d3c6b8;border-radius:50%;background:#fbf9f5;color:var(--brown);font-size:22px;z-index:2}
-.detail-stock{margin:14px 0;padding:12px 0;border-top:1px solid #d8cfc4;border-bottom:1px solid #d8cfc4;font-size:12px;line-height:1.8;color:#75675d}
-.detail-cta{margin-top:18px;background:#49382e;color:#fbf9f5;padding:15px 17px;font:14px/1.5 Georgia}
-.detail-cta b{display:block;color:#e2c99f;font-size:17px;margin-bottom:4px}
-.navbtn,.primary{background:var(--brown);color:#fff}.secondary{background:#e8dfd4;color:var(--brown)}.outline{background:transparent;border:1px solid #bfae9c;color:var(--brown)}
-main{position:relative;flex:1;min-height:0;overflow:hidden}
-.view{display:none;height:100%;overflow:auto}.view.active{display:block}
-#home{padding:clamp(12px,2vh,22px) 3.5vw 12px;overflow:hidden;display:none}
-#home.active{display:block}
-.home-layout{width:min(1500px,100%);height:100%;min-height:0;margin:0 auto;display:grid;grid-template-columns:minmax(250px, .72fr) minmax(0,1.65fr);gap:clamp(16px,2.2vw,30px);align-items:stretch}
-.home-sidebar{min-width:0;display:flex;flex-direction:column;gap:14px}
-.mobile-hero{width:100%;height:100%;min-height:0;padding:clamp(20px,2.5vw,32px) clamp(18px,2vw,27px);border-radius:22px;background:linear-gradient(145deg,#49382e 0%,#594337 58%,#3d2e27 100%);color:#f4ede4;display:flex;flex-direction:column;justify-content:space-between;gap:20px;box-shadow:0 10px 28px #49382e18;position:relative;overflow:hidden}
-.mobile-hero:after{content:"";position:absolute;width:280px;height:280px;border:1px solid #c8ad8240;border-radius:50%;right:-155px;top:-130px;pointer-events:none}
-.hero-brand{min-width:0;position:relative;z-index:1}
-.hero-kicker{font:600 clamp(20px,2.3vw,29px) Georgia,serif;letter-spacing:.18em;color:#f1e5d4}
-.hero-title{font:500 clamp(18px,1.8vw,24px) Arial,sans-serif;letter-spacing:.07em;color:#d4b78c;margin-top:9px}
-.hero-brand p{font:clamp(12px,1.1vw,14px)/1.55 Arial,sans-serif;color:#eee4d8;margin:10px 0 0}
-.hero-rule{height:1px;background:linear-gradient(90deg,#c7a979,#c7a97955);width:100%;margin:18px 0 15px}
-.hero-brand h1{font:600 clamp(19px,1.8vw,25px)/1.2 Arial,sans-serif;margin:0;color:#fff8ef}
-.hero-brand .hero-subtitle{font-size:clamp(12px,1.05vw,14px);margin-top:9px;color:#e4d4c2}
-.hero-social{position:relative;z-index:1;display:flex;align-items:center;gap:12px;padding:12px;background:#f7f1e8;border-radius:15px;color:#49382e;width:100%}
-.hero-social img{width:clamp(72px,7vw,94px);height:clamp(72px,7vw,94px);flex:0 0 auto;object-fit:contain;background:#fff;padding:4px;border-radius:7px}
-.hero-social strong{display:block;font:clamp(14px,1.2vw,17px)/1.2 Georgia,serif;margin-bottom:6px}
-.hero-social span{display:block;font:11px/1.45 Arial,sans-serif;color:#77675c}
-.hero-social b{color:#8c6945;white-space:nowrap}
-.carousel-panel{min-width:0;min-height:0;display:flex;align-items:center;justify-content:center;padding:clamp(6px,1vw,14px) 0}
-#slides{width:100%;height:100%;min-height:0;display:flex;align-items:center;justify-content:center}
-.slide{width:100%;height:100%;max-height:560px;margin:auto;display:none;grid-template-columns:1fr .9fr;gap:clamp(18px,4vw,60px);align-items:center;animation:fade .6s ease}
-.slide.active{display:grid}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.photo{height:100%;max-height:560px;min-height:0;position:relative;background:#e4dbd0;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.photo img{width:100%;height:100%;object-fit:cover;display:block}.photo:after{content:"ÉLANCE";position:absolute;bottom:16px;left:18px;color:#fff;font:12px Georgia;letter-spacing:.3em;text-shadow:0 1px 5px #4448}
-.copy{padding:clamp(5px,1.5vw,22px) 0;max-width:470px}.eyebrow{font-size:10px;letter-spacing:.23em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
-.product-name{font:clamp(27px,3.6vw,46px)/1.08 Georgia,serif;margin:0 0 12px;font-weight:400}
-.description{font:clamp(14px,1.6vw,18px)/1.55 Georgia,serif;color:#76675c;max-width:410px}
-.price{font:clamp(27px,3.1vw,40px) Georgia,serif;color:#9b7952;margin:16px 0 5px}
-.oldprice{font-size:13px;color:#9b8d81;text-decoration:line-through}
-.sizes{font-size:12px;color:#84766b;letter-spacing:.05em;margin:12px 0 17px;line-height:1.6}
-.tag{display:inline-block;border-top:1px solid #bba88f;border-bottom:1px solid #bba88f;padding:9px 0;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#78634e}
- .cta{font-size:12px;line-height:1.5;color:#75675d;margin-top:12px;max-width:390px}
-.follow-card{display:flex;align-items:center;gap:12px;margin-top:12px;padding:9px 12px;background:#eee7dd;border-left:2px solid var(--gold);max-width:390px}
-.follow-card img{width:82px;height:82px;flex:0 0 82px;padding:5px;background:#fbf9f5;object-fit:contain}
-.follow-card strong{display:block;font:15px Georgia;font-weight:400;margin-bottom:4px;color:var(--brown)}
-.follow-card span{display:block;font-size:10px;line-height:1.45;color:#76675c}
-.follow-card a{color:#8b6b45;text-decoration:none;font-weight:bold}
-
-.home-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:20px}
-.footer{height:58px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 4vw;border-top:1px solid var(--line);gap:12px}
-.progress{height:2px;background:#d8cec2;flex:1;max-width:240px;margin:0 12px;overflow:hidden}.bar{height:100%;width:0;background:var(--gold)}
-.counter{font-size:10px;letter-spacing:.14em;color:var(--muted);min-width:48px}
-.controls{display:flex;gap:8px}.ctrl{border:1px solid #cbbdad;background:transparent;color:var(--brown);width:34px;height:34px;border-radius:50%}
-.footer-note{font-size:10px;letter-spacing:.08em;color:var(--muted);text-align:center}
-.pagehead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 4vw 12px;position:sticky;top:0;background:#f3eee8ed;backdrop-filter:blur(8px);z-index:2;border-bottom:1px solid var(--line)}
-.pagehead h1{font:clamp(25px,4vw,38px) Georgia;margin:0;font-weight:400}.pagehead p{font-size:11px;color:var(--muted);margin:5px 0 0}
-.catalog-wrap{padding:18px 4vw 30px;max-width:1400px;margin:auto}
-.catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:18px}
-.card{background:#fbf9f5;border:1px solid #e1d8ce;display:flex;flex-direction:column;min-width:0}
-.card-img{width:100%;aspect-ratio:4/5;object-fit:cover;background:#e6ded4}
-.card-body{padding:13px;display:flex;flex-direction:column;gap:8px;flex:1}
-.card-name{font:22px Georgia;margin:0;font-weight:400}.card-desc{font:13px/1.4 Georgia;color:#827367;min-height:34px}
-.card-price{font:25px Georgia;color:#9b7952}.card-old{font-size:11px;text-decoration:line-through;color:#9b8d81}
-.card-stock{font-size:11px;line-height:1.5;color:#77685c}
-.card-actions{display:flex;gap:7px;margin-top:auto;align-items:center}
-.card select{min-width:0;flex:1;padding:9px 7px;border:1px solid #d7cdc2;background:white;color:var(--brown);border-radius:4px;font-size:12px}
-.card .primary{padding:10px 12px;white-space:nowrap}
-.empty{padding:40px 20px;text-align:center;color:var(--muted);font:18px Georgia}
-
-
-
-
-
-
-
-
-.statusline{font-size:10px;color:var(--muted);letter-spacing:.1em}
-@media(max-width:650px){
- .detail-modal{grid-template-columns:1fr;grid-template-rows:minmax(180px,36vh) auto;max-height:90dvh}
- .detail-modal img{height:36vh;min-height:180px;max-height:36vh}
- .detail-copy{padding:17px 20px}.detail-copy h2{font-size:27px}.detail-copy p{font-size:13px}.detail-cta{font-size:12px;margin-top:10px}
-
- .top{min-height:54px;padding:7px 4vw}.brand{font-size:19px}.brand small{font-size:7px}.topright{font-size:8px;gap:7px}.topright .navbtn{padding:9px 11px;font-size:9px}
- #home{padding:9px 3vw}.home-layout{grid-template-columns:minmax(190px,.72fr) minmax(0,1.65fr);gap:12px}.mobile-hero{padding:15px 13px;border-radius:16px;gap:14px}.hero-social{padding:7px;gap:7px}.hero-social img{width:54px;height:54px}.hero-social strong{font-size:12px}.hero-social span{font-size:9px}.hero-rule{margin:10px 0 8px}.slide{grid-template-columns:1fr .95fr;grid-template-rows:1fr;gap:12px;max-height:100%}.photo{max-height:100%}.photo{height:100%;min-height:0}.copy{padding:0 2px 3px}.eyebrow{margin-bottom:6px;font-size:8px}.product-name{font-size:25px;margin-bottom:5px}.description{font-size:13px;line-height:1.32}.price{font-size:25px;margin:7px 0 3px}.sizes{margin:6px 0 8px;font-size:10px}.tag{padding:5px 0;font-size:8px}  .cta{margin-top:7px;font-size:10px;line-height:1.35}.home-actions{margin-top:7px}.home-actions button{padding:9px 12px;font-size:9px}
- .footer{height:46px;padding:0 4vw}.footer-note{display:none}.progress{margin:0 5px}
- .pagehead{padding:12px 4vw}.pagehead p{font-size:10px}.catalog-wrap{padding:12px 3vw 24px}.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.card-body{padding:9px;gap:6px}.card-name{font-size:17px}.card-desc{font-size:11px;min-height:28px}.card-price{font-size:20px}.card .primary{font-size:9px;padding:9px 8px}.card select{font-size:10px;padding:8px 4px}
+:root{--cream:#f3eee7;--paper:#fffdfa;--brown:#49382e;--deep:#34271f;--muted:#89796d;--gold:#b3946b;--line:#e8dfd5;--sale:#a65d48;--shadow:0 12px 34px #49382e12}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:var(--cream);color:var(--brown)}body{padding-bottom:env(safe-area-inset-bottom)}button,input{font:inherit}button{cursor:pointer}a{color:inherit}
+.app{min-height:100dvh;background:linear-gradient(145deg,#f7f3ed,#eee7de)}
+.top{position:sticky;top:0;z-index:10;min-height:68px;padding:10px clamp(16px,4vw,54px);display:flex;align-items:center;justify-content:space-between;gap:14px;background:#f7f3edee;backdrop-filter:blur(14px);border-bottom:1px solid #ded4c9}
+.brand{font:26px Georgia,serif;letter-spacing:.24em;white-space:nowrap}.brand small{display:block;margin-top:4px;font:9px Arial,sans-serif;letter-spacing:.17em;color:var(--muted)}
+.top-right{display:flex;align-items:center;gap:12px}.live-label{font-size:10px;letter-spacing:.15em;color:var(--muted);text-transform:uppercase}
+.pill{border:0;border-radius:999px;background:var(--brown);color:#fff;padding:11px 17px;font-size:11px;letter-spacing:.06em;text-decoration:none;white-space:nowrap}
+main{max-width:1440px;margin:auto;padding:clamp(16px,3vw,34px) clamp(14px,4vw,48px) 54px}
+.intro{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:22px}
+.kicker{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700}
+h1{font:clamp(30px,4vw,48px)/1.05 Georgia,serif;font-weight:400;margin:8px 0 8px;color:var(--deep)}
+.intro p{margin:0;color:var(--muted);font:14px/1.5 Georgia,serif;max-width:590px}
+.intro-note{background:#49382e;color:#f8f1e8;padding:15px 18px;border-radius:18px;max-width:310px;font-size:12px;line-height:1.5;box-shadow:var(--shadow)}
+.intro-note strong{display:block;color:#e0c49a;font:17px Georgia,serif;margin-bottom:4px}
+.toolbar{display:flex;gap:10px;align-items:center;margin:22px 0 18px}
+.search-wrap{position:relative;flex:1}.search-wrap span{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:#9a8b7e;font-size:17px}
+.search{width:100%;height:46px;border:1px solid #e2d8cd;border-radius:999px;background:#fffdfa;padding:0 18px 0 43px;color:var(--brown);outline:none;font-size:13px}
+.search:focus{border-color:var(--gold);box-shadow:0 0 0 3px #b3946b20}
+.count{font-size:11px;color:var(--muted);white-space:nowrap}
+.catalog-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.card{min-width:0;overflow:hidden;background:var(--paper);border:1px solid #e9e0d6;border-radius:20px;box-shadow:0 5px 20px #49382e09;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.image-wrap{position:relative;aspect-ratio:4/4.8;background:#e9e1d7;overflow:hidden}
+.card-img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .35s}.card:hover .card-img{transform:scale(1.025)}
+.discount{position:absolute;top:12px;left:12px;padding:7px 10px;border-radius:999px;background:var(--sale);color:white;font-size:10px;font-weight:700;letter-spacing:.04em}
+.card-content{padding:14px;display:flex;flex-direction:column;gap:7px;flex:1}
+.category{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);min-height:11px}
+.card-name{font:21px/1.12 Georgia,serif;margin:0;color:var(--deep);font-weight:400}
+.card-desc{font:12px/1.45 Georgia,serif;color:var(--muted);min-height:34px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.prices{display:flex;flex-wrap:wrap;align-items:baseline;gap:7px;margin-top:2px}
+.current-price{font:25px Georgia,serif;color:#98764f}
+.old-price{font-size:11px;color:#a99b8e;text-decoration:line-through}
+.stock{font-size:10px;color:#827468;line-height:1.5;margin-top:1px}
+.details-btn{margin-top:auto;border:1px solid #d9cbbb;background:#f4eee6;color:var(--brown);border-radius:999px;padding:11px 14px;font-size:11px;letter-spacing:.06em;transition:.2s}
+.details-btn:hover{background:var(--brown);color:#fff;border-color:var(--brown)}
+.empty{grid-column:1/-1;text-align:center;padding:54px 20px;background:#fffdfa;border-radius:20px;color:var(--muted);font:18px Georgia,serif}
+.story{margin-top:30px;padding:22px 24px;border-radius:20px;background:#eee6dc;display:flex;justify-content:space-between;align-items:center;gap:18px}
+.story strong{font:21px Georgia,serif;font-weight:400;display:block;margin-bottom:6px}.story p{margin:0;max-width:760px;color:#79695d;font-size:12px;line-height:1.6}
+.story a{flex-shrink:0;text-decoration:none;border:1px solid #c7b59f;border-radius:999px;padding:11px 15px;font-size:11px}
+.status{text-align:center;padding:14px 10px 0;color:#9a8b7e;font-size:9px;letter-spacing:.12em}
+/* Product details: mobile bottom sheet, desktop centered modal */
+.overlay{position:fixed;inset:0;z-index:30;background:#211913a8;display:none;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(5px)}
+.overlay.show{display:flex}
+.modal{position:relative;width:min(880px,100%);max-height:min(90dvh,800px);overflow:auto;background:var(--paper);border-radius:26px;display:grid;grid-template-columns:1fr 1fr;box-shadow:0 25px 80px #0004;animation:rise .22s ease}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.modal-image{width:100%;height:100%;min-height:440px;max-height:720px;object-fit:cover;background:#e9e1d7}
+.modal-info{padding:clamp(22px,4vw,42px);display:flex;flex-direction:column;justify-content:center}
+.close{position:absolute;right:13px;top:13px;z-index:2;width:40px;height:40px;border:0;border-radius:50%;background:#fffdfaee;color:var(--brown);font-size:24px;box-shadow:0 2px 10px #0001}
+.modal-info h2{font:clamp(29px,4vw,42px)/1.05 Georgia,serif;font-weight:400;margin:9px 0 12px;color:var(--deep)}
+.modal-desc{font:15px/1.6 Georgia,serif;color:var(--muted);margin:0 0 18px}
+.modal-prices{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:4px 0 15px}
+.modal-current{font:36px Georgia,serif;color:#98764f}.modal-old{font-size:14px;color:#a99b8e;text-decoration:line-through}
+.saving{display:inline-block;width:max-content;border-radius:999px;background:#f4e7df;color:#9c5945;padding:7px 11px;font-size:11px;font-weight:700;margin-bottom:17px}
+.modal-stock{padding:15px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:12px;line-height:1.9;color:#77685c}
+.modal-stock strong{display:block;color:var(--brown);margin-bottom:4px}
+.modal-message{margin-top:18px;padding:16px;border-radius:16px;background:#f0e9df;color:#6f5c4d;font:13px/1.55 Georgia,serif}
+.modal-message b{display:block;color:var(--brown);font:17px Georgia,serif;margin-bottom:5px}
+/* Showcase carousel remains as a calm fallback / timed return screen */
+.home-screen{display:none;min-height:calc(100dvh - 68px);padding:24px 4vw;max-width:1440px;margin:auto}
+.home-screen.show{display:flex;align-items:center;justify-content:center}
+.home-inner{width:100%;display:grid;grid-template-columns:.8fr 1.4fr;gap:30px;align-items:center}
+.home-panel{padding:28px;border-radius:24px;background:linear-gradient(145deg,#49382e,#352820);color:#f7f0e7}
+.home-panel h2{font:30px Georgia,serif;font-weight:400;margin:0 0 12px}.home-panel p{font-size:13px;line-height:1.6;color:#e6d8c8}
+.home-panel button{margin-top:14px;border:0;border-radius:999px;background:#e7d3b6;color:#49382e;padding:13px 18px}
+.featured{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;min-width:0}
+.featured img{width:100%;max-height:520px;aspect-ratio:4/5;object-fit:cover;border-radius:22px;background:#e9e1d7}
+.featured h2{font:clamp(28px,4vw,44px) Georgia,serif;font-weight:400;margin:10px 0}
+.featured .current-price{font-size:32px}
+@media(max-width:1050px){.catalog-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:720px){
+ .top{min-height:60px;padding:9px 16px}.brand{font-size:22px}.brand small{font-size:8px;letter-spacing:.12em}.live-label{display:none}.top-right{gap:7px}.pill{padding:10px 13px;font-size:10px}
+ main{padding:20px 14px 36px}.intro{display:block;margin-bottom:17px}h1{font-size:34px;margin:7px 0}.intro p{font-size:13px;max-width:100%}.intro-note{margin-top:15px;max-width:none;padding:13px 15px;border-radius:16px}.intro-note strong{font-size:16px}
+ .toolbar{margin:17px 0 14px;gap:8px}.search{height:44px;font-size:13px}.count{font-size:10px}
+ .catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.card{border-radius:17px}.image-wrap{aspect-ratio:3/3.8}.discount{top:8px;left:8px;padding:6px 8px;font-size:9px}.card-content{padding:10px;gap:6px}.category{font-size:8px}.card-name{font-size:18px}.card-desc{font-size:11px;min-height:30px}.current-price{font-size:21px}.old-price{font-size:10px}.stock{font-size:9px}.details-btn{padding:10px 8px;font-size:10px}
+ .story{margin-top:20px;padding:17px;border-radius:17px;display:block}.story strong{font-size:19px}.story p{font-size:11px}.story a{display:inline-block;margin-top:13px}
+ .overlay{padding:0;align-items:flex-end}.modal{width:100%;max-height:92dvh;border-radius:24px 24px 0 0;grid-template-columns:1fr;grid-template-rows:minmax(210px,36dvh) auto;overflow:auto}
+ .modal-image{height:36dvh;min-height:210px;max-height:36dvh}.modal-info{padding:18px 20px calc(22px + env(safe-area-inset-bottom))}.modal-info h2{font-size:29px;margin:6px 0 8px}.modal-desc{font-size:13px;margin-bottom:12px}.modal-current{font-size:30px}.saving{margin-bottom:12px}.modal-stock{padding:11px 0;font-size:11px}.modal-message{margin-top:12px;padding:13px;font-size:12px}.close{top:12px;right:12px}
+ .home-screen{min-height:calc(100dvh - 60px);padding:15px}.home-inner{grid-template-columns:1fr;gap:15px}.home-panel{padding:20px;border-radius:19px}.home-panel h2{font-size:25px}.featured{grid-template-columns:.9fr 1fr;gap:13px}.featured img{max-height:330px}.featured h2{font-size:24px}.featured .current-price{font-size:24px}
 }
-@media(max-width:650px) and (orientation:portrait){
- #home{padding:8px 3vw;overflow:auto}.home-layout{height:auto;grid-template-columns:1fr;gap:10px}.mobile-hero{padding:15px;border-radius:16px;gap:13px}.hero-social{max-width:100%}.hero-social img{width:58px;height:58px}.carousel-panel{min-height:56vh;padding:0}.slide{grid-template-columns:1fr;grid-template-rows:minmax(220px,38vh) auto;gap:8px;max-height:none}.photo{height:100%;min-height:220px;max-height:38vh}.copy{padding:0 2px 12px}.hero-brand p{margin-top:5px}
-}
-@media(orientation:landscape) and (max-height:520px){.top{min-height:44px}.footer{height:42px}#home{padding-top:7px}.home-layout{grid-template-columns:minmax(170px,.68fr) minmax(0,1.7fr);gap:12px}.mobile-hero{padding:12px;gap:10px}.hero-rule{margin:8px 0 6px}.hero-social{padding:7px}.hero-social img{width:50px;height:50px}.slide{gap:16px}.photo{max-height:calc(100dvh - 90px)}.product-name{font-size:32px}.eyebrow{margin-bottom:7px}.description{font-size:13px}.price{margin:7px 0}.cta{margin-top:8px}}
+@media(max-width:380px){.catalog-grid{gap:8px}.card-content{padding:8px}.card-name{font-size:16px}.current-price{font-size:19px}.details-btn{font-size:9px}.brand{font-size:20px}}
 </style>
 </head>
 <body>
 <div class="app">
- <header class="top">
-  <div class="brand">ÉLANCE<small>SUA LOJA MÓVEL • ESCOLHA E LEVE AGORA.</small></div>
-  <div class="topright"><span id="syncStatus">MODA A BORDO</span><button class="navbtn" id="openCatalog">Ver mais produtos</button></div>
- </header>
- <main>
-  <section id="home" class="view active">
-   <div class="home-layout">
-    <aside class="home-sidebar">
-     <header class="mobile-hero">
-    <div class="hero-brand">
-     <div class="hero-kicker">ÉLANCE</div>
-     <div class="hero-title">SUA LOJA MÓVEL.</div>
-     <p>Moda, estilo e uma história que merece ser compartilhada.</p>
-     <div class="hero-rule"></div>
-     <h1>Gostou? Está aqui no Uber!</h1>
-     <p class="hero-subtitle">Conheça a peça de perto e, se quiser, retire agora mesmo.</p>
-    </div>
-    <div class="hero-social">
-     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAV4AAAFeCAIAAABCSeBNAAAFmklEQVR42u3dMW4bMRCGUSvYS6XKDXLY3MBVTqRCUJM6LlYxmN8zw32vl7SmhA80MCBvz8f9DeBv3ywBIA2ANADSAEgDIA2ANADSAEgDIA2ANADSAEgDIA0A0gBIAyANgDQA0gBIAyANgDQA0gBIAyANgDQA0gBIA4A0AK8dubf++eP7Zov16/13yWqcf+75O+deW/X3+k1+zVrZNQDSAEgDIA2ANADSAEgDIA2ANACDHFUfnJviWrEyLVc175h7qqp39pvssM52DYA0ANIASAMgDYA0ANIASAMgDcAgR8/Hyk2AXW3iLXe+Y88THCeeK9nzN2nXAEgDIA2ANADSAEgDIA2ANADSAAxyWIKvUXXb9co7506s7Dn/h10DIA2ANADSAEgDIA2ANADSAEgDMJRpyP9mZcIvNx2431mYJintGgBpAKQBkAZAGgBpAKQBkAZAGgA+aDoNud/EW27+L3fq5MpT5T636v7uq01h2jUA0gBIAyANgDQA0gBIAyANgDQAg5RNQ65MB/aUu+266nN7vtZv0q4BkAZAGgBpAKQBkAZAGgBpAKQB4IPgNKQbja1Vt7/Xb9KuAZAGQBoAaQCkAZAGQBoAaQCkAdjS7fm4h9665/l/uWfOnSyYu1e66nOrTp3suc65p7JrAKQBkAZAGgBpAKQBkAZAGgBpAC5i5DTkxAm/iX/RyudOnA7suRqmIQH/UADSAEgDIA2ANADSAEgDgDQALwWnIc/1PIVxxdWm9CauRtUz2zUA0gBIAyANgDQASAMgDYA0ANIARB1VH5ybPOs5h7cy/dlzorFqJrXqlu3ca+0aAGkApAGQBkAaAGkAkAZAGgBpABaVTUPmpgOrnmq/0y5zT7XfBGfP36RdAyANgDQA0gBIAyANgDQA0gBIA3ARZTdln9vvpL3c3zvxHu2ciac/5r5BuwZAGgBpAKQBkAZAGgBpAKQBkAbgIoLTkD1nvHLPvGLiVOLEm6N7To72nO61awCkAZAGQBoAaQCkAZAGQBoAaQAGKZuGnDhb1vN0wKrVyKn69qtmJXvOldo1ANIASAMgDYA0ANIASAMgDYA0AIMcubdemdPqOVm44mrzjiszfD1Pyqx6qqrv164BkAZAGgBpAKQBkAZAGgBpAKQBGKTpTdnncrOSPW9wrjpHs+dcaU/7zUraNQDSAEgDIA2ANADSAEgDIA2ANACDHD0fq+f838TZwdy0XM8byXvesj3xrFO7BkAaAGkApAGQBkAaAGkApAGQBmCQsrMhc1OJ+z1VzsRbtnvquZJ2DYA0ANIASAMgDYA0ANIASAMgDcBFbHg25PlrTWH++ztP/I56clM24B8KQBoAaQCkAUAaAGkApAGQBiAqeDbk1eRmFnOfO/Fe6Z7rnFsruwZAGgBpAKQBkAZAGgBpAKQBQBqAl8puyp6o513YPef/Vp6554mVE79BuwZAGgBpAKQBkAZAGgBpAKQBkAbgIspuyu45AVY1wemcxem/uomnP9o1ANIASAMgDYA0ANIASAMgDYA0ANs4ej7W1c7hy61GbiVXJilzpzBWzVlOnEm1awCkAZAGQBoAaQCkAZAGQBoAaQC2cViCDqruhs49Vc9btqteO3FW0q4BkAZAGgBpAKQBkAZAGgBpAKQBGMQ05Hi5abmqGc2VZ5546qSzIQH/UADSAEgDIA2ANABIAyANgDQAi5pOQ068z3qiqnulc99vzzMpc+/sbEjAPxSANADSAEgDIA2ANADSAEgDwFvhNGTVHF7VX9Rz4m3irdNVJ0fuNzlq1wBIAyANgDQA0gBIAyANgDQA0gBs4/Z83K0CYNcASAMgDYA0ANIASAMgDYA0ANIASAMgDYA0ANIAIA2ANADSAEgDIA2ANADSAEgDIA2ANADSAEgDIA2ANABIAyANwOf9AaiQQbGMNXt4AAAAAElFTkSuQmCC" alt="QR Code para o Instagram da ÉLANCE">
-     <div><strong>Ajude esse sonho a crescer.</strong><span>Aponte a câmera e siga <b>@oficialelance</b></span></div>
-     </div>
-     </header>
-    </aside>
-    <main class="carousel-panel">
-     <div id="slides"></div>
-    </main>
-   </div>
-  </section>
-  <section id="catalog" class="view">
-   <div class="pagehead"><div><h1>Catálogo ÉLANCE</h1><p>Escolha sua peça e leve agora. Os produtos estão disponíveis na loja móvel.</p></div><button class="outline" id="backHome">Voltar à vitrine</button></div>
-   <div class="catalog-wrap">
-    <aside class="story"><strong>Um sonho que também pega carona.</strong><p>A ÉLANCE é uma pequena loja online criada com muito carinho. Esta vitrine sobre rodas nasceu de um jeito simples de apoiar esse sonho e aproximar as peças de quem passa por aqui. Se gostar de algo, fique à vontade para conhecer — sem compromisso.</p></aside>
-    <div class="catalog-grid" id="catalogGrid"></div>
-   </div>
-  </section>
- </main>
- <div class="detail-overlay" id="detailOverlay" role="dialog" aria-modal="true" aria-label="Detalhes do produto">
-  <div class="detail-modal">
-   <button class="detail-close" id="closeDetail" aria-label="Fechar">×</button>
-   <img id="detailImage" src="" alt="">
-   <div class="detail-copy">
-    <div class="eyebrow">DETALHES DA PEÇA • ÉLANCE</div>
-    <h2 id="detailName"></h2>
-    <p id="detailDescription"></p>
-    <div class="price" id="detailPrice"></div>
-    <div class="oldprice" id="detailOldPrice"></div>
-    <div class="detail-stock" id="detailStock"></div>
-    <div class="detail-cta"><b>Retire agora — está aqui no Uber.</b>Gostou? Quando o veículo estiver parado, peça para ver a peça de perto e conferir o tamanho. Se fizer sentido para você, pode levar na hora. Sem compromisso.</div>
-   </div>
-  </div>
+<header class="top">
+ <div class="brand">ÉLANCE<small>SUA LOJA MÓVEL • ESCOLHA E LEVE AGORA.</small></div>
+ <div class="top-right"><span class="live-label" id="syncStatus">MODA A BORDO</span><a class="pill" href="https://www.instagram.com/oficialelance/" target="_blank" rel="noopener">Instagram ↗</a></div>
+</header>
+
+<section class="home-screen" id="homeScreen">
+ <div class="home-inner">
+  <div class="home-panel"><div class="kicker" style="color:#d4b78c">ÉLANCE • LOJA MÓVEL</div><h2>Gostou? Está aqui no Uber!</h2><p>Conheça as peças, veja os detalhes e, se gostar, peça para conferir de perto quando o veículo estiver parado. Você pode levar na hora.</p><button id="goCatalog">Explorar catálogo</button></div>
+  <div class="featured" id="featured"></div>
  </div>
- <footer class="footer" id="homeFooter"><div class="counter" id="counter">01 / 01</div><div class="progress"><div class="bar" id="bar"></div></div><div class="footer-note">GOSTOU? ESCOLHA E LEVE COM VOCÊ NESTA CORRIDA</div><div class="controls"><button class="ctrl" id="prev" aria-label="Anterior">‹</button><button class="ctrl" id="pause" aria-label="Pausar">Ⅱ</button><button class="ctrl" id="next" aria-label="Próximo">›</button></div></footer>
+</section>
+
+<main id="catalogMain">
+ <section class="intro">
+  <div><div class="kicker">MODA QUE ENCONTRA VOCÊ</div><h1>Encontre seu próximo favorito.</h1><p>Peças selecionadas para expressar seu estilo. Gostou? Ela pode estar aqui, pertinho de você.</p></div>
+  <div class="intro-note"><strong>Gostou? Está aqui no Uber!</strong>Veja de perto, confira seu tamanho e, se quiser, leve agora mesmo. Sem compromisso.</div>
+ </section>
+ <div class="toolbar"><div class="search-wrap"><span>⌕</span><input class="search" id="searchInput" type="search" placeholder="Buscar por produto ou categoria..." autocomplete="off"></div><div class="count" id="productCount">Carregando...</div></div>
+ <section class="catalog-grid" id="catalogGrid"><div class="empty">Preparando as peças da ÉLANCE...</div></section>
+ <aside class="story"><div><strong>Um sonho que também pega carona.</strong><p>A ÉLANCE é uma pequena loja online que ganhou as ruas para aproximar nossas peças de você. Esta loja móvel nasceu do desejo de apoiar um sonho e compartilhar moda de um jeito diferente. Obrigado por conhecer e apoiar pequenos negócios.</p></div><a href="https://www.instagram.com/oficialelance/" target="_blank" rel="noopener">Conheça @oficialelance ↗</a></aside>
+ <div class="status" id="footerStatus">ÉLANCE • DESAFIE-SE E VIVA SUA MELHOR VERSÃO.</div>
+</main>
+<div class="overlay" id="detailOverlay" role="dialog" aria-modal="true" aria-label="Detalhes do produto">
+ <div class="modal"><button class="close" id="closeDetail" aria-label="Fechar">×</button><img class="modal-image" id="detailImage" src="" alt=""><div class="modal-info">
+  <div class="kicker">DETALHES DA PEÇA • ÉLANCE</div><h2 id="detailName"></h2><p class="modal-desc" id="detailDescription"></p>
+  <div class="modal-prices"><span class="modal-current" id="detailPrice"></span><span class="modal-old" id="detailOldPrice"></span></div><div class="saving" id="detailSaving" hidden></div>
+  <div class="modal-stock" id="detailStock"></div>
+  <div class="modal-message"><b>Retire agora — está aqui no Uber.</b>Se quiser conhecer a peça, peça para ver de perto quando o veículo estiver parado. Confira o tamanho e, se gostar, pode levar na hora. Sem compromisso.</div>
+ </div></div>
 </div>
+
 <script>
-const SHEET_ID = "1OylGEecAOTvaCw_kiG5h-o29xoTE_o41sLD7IWM7e7o";
-const SHEET_GID = "0";
-const RESERVED = new Set(["ID","PRODUTO","NOME","NOME_PRODUTO","DESCRICAO","DESCRIÇÃO","DESCRIPTION","VALOR","PRECO","PREÇO","PRICE","VALOR_ANTERIOR","PRECO_ANTERIOR","PREÇO_ANTERIOR","TAMANHOS","TAMANHO","SIZES","URL_IMAGEM","IMAGEM","FOTO","FOTO_URL","IMAGEURL","IMAGE_URL","DISPONIVEL","DISPONÍVEL","ATIVO","STATUS","DESTAQUE","FEATURED","CATEGORIA","ESTOQUE","STOCK"]);
+const SHEET_ID="1OylGEecAOTvaCw_kiG5h-o29xoTE_o41sLD7IWM7e7o";
+const SHEET_GID="0";
+const RESERVED=new Set(["ID","PRODUTO","NOME","NOME_PRODUTO","DESCRICAO","DESCRIÇÃO","DESCRIPTION","VALOR","PRECO","PREÇO","PRICE","VALOR_ANTERIOR","PRECO_ANTERIOR","PREÇO_ANTERIOR","TAMANHOS","TAMANHO","SIZES","URL_IMAGEM","IMAGEM","FOTO","FOTO_URL","IMAGEURL","IMAGE_URL","DISPONIVEL","DISPONÍVEL","ATIVO","STATUS","DESTAQUE","FEATURED","CATEGORIA","ESTOQUE","STOCK"]);
 let cloudProducts=JSON.parse(localStorage.getItem("elance_cloud_cache")||"[]");
-let currentView="home",index=0,paused=false,slideTimer=null,inactivityTimer=null,lastActivity=Date.now();
-const slidesEl=document.getElementById("slides"),bar=document.getElementById("bar"),counter=document.getElementById("counter");
-const parseMoney=v=>{if(typeof v==="number")return v;const raw=String(v??"").trim().replace(/R\$/i,"").replace(/\s/g,"");if(!raw)return NaN;const normalized=raw.includes(",")?raw.replace(/\./g,"").replace(",","."):raw;return Number(normalized);};
-const money=v=>{const n=parseMoney(v);return Number.isFinite(n)?n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"}):"Consulte o valor";};
+let currentView="catalog",inactivityTimer=null;
+const grid=document.getElementById("catalogGrid");
+const parseMoney=v=>{if(typeof v==="number")return v;const raw=String(v??"").trim().replace(/R\$/i,"").replace(/\s/g,"");if(!raw)return NaN;return Number(raw.includes(",")?raw.replace(/\./g,"").replace(",","."):raw)};
+const money=v=>{const n=parseMoney(v);return Number.isFinite(n)?n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"}):"Consulte o valor"};
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const yes=v=>["SIM","S","TRUE","1","YES","VERDADEIRO"].includes(String(v??"").trim().toUpperCase());
-function parseCSV(text){
- const rows=[];let row=[],field="",quoted=false;
- for(let i=0;i<text.length;i++){const c=text[i],next=text[i+1];if(c==='"'&&quoted&&next==='"'){field+='"';i++;}else if(c==='"'){quoted=!quoted;}else if(c===","&&!quoted){row.push(field);field="";}else if((c==="\n"||c==="\r")&&!quoted){if(c==="\r"&&next==="\n")i++;row.push(field);if(row.some(v=>v.trim()))rows.push(row);row=[];field="";}else field+=c;}
- row.push(field);if(row.some(v=>v.trim()))rows.push(row);if(!rows.length)return [];
- const headers=rows.shift().map(h=>h.replace(/^\uFEFF/,"").trim().toUpperCase());
- return rows.map(r=>Object.fromEntries(headers.map((h,i)=>[h,(r[i]||"").trim()])));
-}
-function loadSheet(){
- return new Promise((resolve,reject)=>{
-  const cb="elanceSheetCallback_"+Date.now();
-  const script=document.createElement("script");let done=false;
-  const finish=(err,data)=>{if(done)return;done=true;clearTimeout(t);script.remove();delete window[cb];err?reject(err):resolve(data);};
-  const t=setTimeout(()=>finish(new Error("Tempo esgotado ao consultar a planilha.")),15000);
-  window[cb]=res=>{if(!res||res.status!=="ok"||!res.table){finish(new Error("A planilha não retornou dados. Confira se a aba está publicada na Web."));return;}
-   const headers=res.table.cols.map(c=>String(c.label||c.id||"").trim().toUpperCase());
-   const data=res.table.rows.map(r=>{const o={};headers.forEach((h,i)=>{const c=r.c?.[i];o[h]=c?(c.v??c.f??""):"";});return o;});finish(null,data);};
-  script.onerror=()=>finish(new Error("Não foi possível acessar o Google Sheets. Verifique a publicação e a internet."));
-  const tqx=encodeURIComponent("out:json;responseHandler:"+cb);
-  script.src=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?gid=${SHEET_GID}&tqx=${tqx}&tq=${encodeURIComponent("select *")}&_=${Date.now()}`;
-  document.head.appendChild(script);
- });
-}
-function normalizeProducts(rows){
- if(!rows.length)return [];
- const headers=Object.keys(rows[0]).map(h=>h.toUpperCase());
- const find=(r,names)=>{const k=names.find(x=>Object.prototype.hasOwnProperty.call(r,x));return k?r[k]:"";};
- const sizeCols=headers.filter(h=>!RESERVED.has(h)&&/^[A-Z0-9]{1,5}$/.test(h));
- return rows.map(r=>{
-  const stockBySize={};
-  sizeCols.forEach(size=>{const q=Number(String(r[size]??"").replace(",", "."));if(Number.isFinite(q)&&q>0)stockBySize[size]=q;});
-  const explicit=String(find(r,["TAMANHOS","TAMANHO","SIZES"])).trim();
-  const sizes=Object.keys(stockBySize).length?Object.keys(stockBySize):explicit.split(/[;,]/).map(x=>x.trim()).filter(Boolean);
-  return {
-   id:String(r.ID||r.Id||r.PRODUTO||Math.random()),name:String(find(r,["PRODUTO","NOME","NOME_PRODUTO"])),
-   description:String(find(r,["DESCRICAO","DESCRIÇÃO","DESCRIPTION"])),
-   price:find(r,["VALOR","PRECO","PREÇO","PRICE"]),
-   originalPrice:find(r,["VALOR_ANTERIOR","PRECO_ANTERIOR","PREÇO_ANTERIOR"]),
-   imageUrl:String(find(r,["URL_IMAGEM","IMAGEM","FOTO","FOTO_URL","IMAGEURL","IMAGE_URL"])),
-   available:yes(find(r,["DISPONIVEL","DISPONÍVEL","ATIVO","STATUS"])),
-   featured:yes(find(r,["DESTAQUE","FEATURED"])),category:String(r.CATEGORIA||""),
-   sizes,stockBySize,hasSizeStock:sizeCols.length>0
-  };
- }).filter(p=>p.available&&p.name&&p.imageUrl).sort((a,b)=>Number(b.featured)-Number(a.featured));
-}
-function availableSizes(p){
- if(p.stockBySize&&Object.keys(p.stockBySize).length)return Object.entries(p.stockBySize).map(([s,q])=>({size:s,qty:q}));
- if(p.sizes?.length)return p.sizes.map(s=>({size:s,qty:null}));
- return [{size:"Tamanho a confirmar",qty:null}];
-}
-function setView(view){
- currentView=view;
- document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===view));
- document.getElementById("homeFooter").style.display=view==="home"?"flex":"none";
- if(view==="catalog")renderCatalog();
-  if(view==="home"){index=0;renderSlides();startSlides();}
- touchActivity();
-}
-function touchActivity(){
- lastActivity=Date.now();
- if(currentView!=="home")clearTimeout(inactivityTimer),inactivityTimer=setTimeout(()=>setView("home"),5*60*1000);
-}
-["pointerdown","touchstart","keydown","mousemove"].forEach(ev=>document.addEventListener(ev,()=>{if(currentView!=="home")touchActivity();},{passive:true}));
-function renderSlides(){
- const products=cloudProducts;
- if(!products.length){slidesEl.innerHTML=`<div class="slide active" style="display:grid"><div class="photo"><div style="font:italic 22px Georgia;color:#8c7b6e">ÉLANCE • Loja móvel</div></div><div class="copy"><div class="eyebrow">SUA LOJA MÓVEL</div><h1 class="product-name">Moda a bordo.</h1><div class="description">Estamos preparando nosso catálogo. Em instantes, as peças disponíveis aparecerão aqui.</div><div class="tag" style="margin-top:20px">ESCOLHA E LEVE AGORA</div></div></div>`;counter.textContent="00 / 00";return;}
- if(index>=products.length)index=0;
- slidesEl.innerHTML=products.map((p,i)=>{
-  const sizes=availableSizes(p).map(x=>x.qty===null?x.size:`${x.size} (${x.qty})`).join(" • ");
-  return `<article class="slide ${i===index?"active":""}"><div class="photo"><img src="${esc(p.imageUrl)}" alt="${esc(p.name)}" onerror="this.style.opacity='.12'"></div><div class="copy"><div class="eyebrow">LOJA MÓVEL ÉLANCE • PEÇA A BORDO</div><h1 class="product-name">${esc(p.name)}</h1><div class="description">${esc(p.description||"Uma escolha especial para expressar seu estilo.")}</div><div class="price">${money(p.price)}</div>${p.originalPrice?`<div class="oldprice">${money(p.originalPrice)}</div>`:""}<div class="sizes">TAMANHOS DISPONÍVEIS: ${esc(sizes)}</div><div class="tag">DISPONÍVEL PARA LEVAR AGORA</div><div class="cta">Gostou? Esta peça está na nossa loja móvel. Quando o veículo estiver parado, fale com o motorista para conferir de perto e levar agora.</div><div class="home-actions"><button class="primary" data-details="${i}">Ver detalhes</button><button class="secondary" data-open-catalog>Ver mais produtos</button></div></div></article>`;
- }).join("");
- counter.textContent=String(index+1).padStart(2,"0")+" / "+String(products.length).padStart(2,"0");
- bar.style.width="0%";
-}
-function startSlides(){
- clearInterval(slideTimer);if(currentView!=="home"||paused)return;
- let start=Date.now();
- slideTimer=setInterval(()=>{const pct=Math.min(100,(Date.now()-start)/8000*100);bar.style.width=pct+"%";if(pct>=100){index=(index+1)%Math.max(1,cloudProducts.length);renderSlides();startSlides();}},100);
-}
-function renderCatalog(){
- const grid=document.getElementById("catalogGrid");
- if(!cloudProducts.length){grid.innerHTML='<div class="empty">Nenhum produto disponível no momento.</div>';return;}
- grid.innerHTML=cloudProducts.map((p,i)=>{
-  const sizes=availableSizes(p);
-  return `<article class="card"><img class="card-img" src="${esc(p.imageUrl)}" alt="${esc(p.name)}" onerror="this.style.opacity='.12'"><div class="card-body"><h2 class="card-name">${esc(p.name)}</h2><div class="card-desc">${esc(p.description||"Escolha ÉLANCE disponível na loja móvel.")}</div><div class="card-price">${money(p.price)}</div>${p.originalPrice?`<div class="card-old">${money(p.originalPrice)}</div>`:""}<div class="card-stock">No carro agora • ${sizes.map(x=>esc(x.size)+(x.qty===null?"":` (${x.qty} un.)`)).join(" · ")}</div><div class="card-actions"><button class="primary" data-details="${i}">Ver detalhes</button></div></div></article>`;
- }).join("");
-}
-function showDetails(i){
- const p=cloudProducts[i];if(!p)return;
- const sizes=availableSizes(p);
- document.getElementById("detailImage").src=p.imageUrl;
- document.getElementById("detailImage").alt=p.name;
- document.getElementById("detailName").textContent=p.name;
- document.getElementById("detailDescription").textContent=p.description||"Uma escolha especial para expressar seu estilo.";
- document.getElementById("detailPrice").textContent=money(p.price);
- document.getElementById("detailOldPrice").textContent=p.originalPrice?money(p.originalPrice):"";
- document.getElementById("detailStock").innerHTML="<b>Tamanhos disponíveis no carro</b><br>"+sizes.map(x=>esc(x.size)+(x.qty===null?"":` — ${x.qty} unidade(s)`)).join(" &nbsp; • &nbsp; ");
- document.getElementById("detailOverlay").classList.add("show");
- touchActivity();
-}
-function closeDetails(){document.getElementById("detailOverlay").classList.remove("show");touchActivity();}
-document.addEventListener("click",e=>{
- const detail=e.target.closest("[data-details]");
- if(detail){showDetails(Number(detail.dataset.details));return;}
- if(e.target.closest("[data-open-catalog]")||e.target.id==="openCatalog")setView("catalog");
- if(e.target.id==="backHome")setView("home");
- if(e.target.id==="closeDetail"||e.target.id==="detailOverlay")closeDetails();
-});
+const yes=v=>["SIM","S","TRUE","1","YES","VERDADEIRO","ATIVO","DISPONIVEL","DISPONÍVEL"].includes(String(v??"").trim().toUpperCase());
+function parseCSV(text){const rows=[];let row=[],field="",quoted=false;for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(c==='"'&&quoted&&n==='"'){field+='"';i++}else if(c==='"')quoted=!quoted;else if(c===","&&!quoted){row.push(field);field=""}else if((c==="\n"||c==="\r")&&!quoted){if(c==="\r"&&n==="\n")i++;row.push(field);if(row.some(v=>v.trim()))rows.push(row);row=[];field=""}else field+=c}row.push(field);if(row.some(v=>v.trim()))rows.push(row);if(!rows.length)return [];const headers=rows.shift().map(h=>h.replace(/^\uFEFF/,"").trim().toUpperCase());return rows.map(r=>Object.fromEntries(headers.map((h,i)=>[h,(r[i]||"").trim()]))) }
+function loadSheet(){return new Promise((resolve,reject)=>{const cb="elanceSheetCallback_"+Date.now();const script=document.createElement("script");let done=false;const finish=(err,data)=>{if(done)return;done=true;clearTimeout(timer);script.remove();delete window[cb];err?reject(err):resolve(data)};const timer=setTimeout(()=>finish(new Error("Tempo esgotado ao consultar a planilha.")),15000);window[cb]=res=>{if(!res||res.status!=="ok"||!res.table){finish(new Error("A planilha não retornou dados. Confira se a aba está publicada na Web."));return}const headers=res.table.cols.map(c=>String(c.label||c.id||"").trim().toUpperCase());const data=res.table.rows.map(r=>{const o={};headers.forEach((h,i)=>{const c=r.c?.[i];o[h]=c?(c.v??c.f??""):""});return o});finish(null,data)};script.onerror=()=>finish(new Error("Não foi possível acessar o Google Sheets. Verifique a publicação e a internet."));const tqx=encodeURIComponent("out:json;responseHandler:"+cb);script.src=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?gid=${SHEET_GID}&tqx=${tqx}&tq=${encodeURIComponent("select *")}&_=${Date.now()}`;document.head.appendChild(script)})}
+function normalizeProducts(rows){if(!rows.length)return [];const headers=Object.keys(rows[0]).map(h=>h.toUpperCase());const find=(r,names)=>{const k=names.find(x=>Object.prototype.hasOwnProperty.call(r,x));return k?r[k]:""};const sizeCols=headers.filter(h=>!RESERVED.has(h)&&/^[A-Z0-9]{1,5}$/.test(h));return rows.map((r,i)=>{const stockBySize={};sizeCols.forEach(size=>{const q=Number(String(r[size]??"").replace(",","."));if(Number.isFinite(q)&&q>0)stockBySize[size]=q});const explicit=String(find(r,["TAMANHOS","TAMANHO","SIZES"])).trim();const sizes=Object.keys(stockBySize).length?Object.keys(stockBySize):explicit.split(/[;,]/).map(x=>x.trim()).filter(Boolean);const status=find(r,["DISPONIVEL","DISPONÍVEL","ATIVO","STATUS"]);return {id:String(r.ID||r.Id||"produto-"+i),name:String(find(r,["PRODUTO","NOME","NOME_PRODUTO"])),description:String(find(r,["DESCRICAO","DESCRIÇÃO","DESCRIPTION"])),price:find(r,["VALOR","PRECO","PREÇO","PRICE"]),originalPrice:find(r,["VALOR_ANTERIOR","PRECO_ANTERIOR","PREÇO_ANTERIOR"]),imageUrl:String(find(r,["URL_IMAGEM","IMAGEM","FOTO","FOTO_URL","IMAGEURL","IMAGE_URL"])),available:status===""?true:yes(status),featured:yes(find(r,["DESTAQUE","FEATURED"])),category:String(r.CATEGORIA||""),sizes,stockBySize}}).filter(p=>p.available&&p.name&&p.imageUrl).sort((a,b)=>Number(b.featured)-Number(a.featured))}
+function availableSizes(p){if(p.stockBySize&&Object.keys(p.stockBySize).length)return Object.entries(p.stockBySize).map(([size,qty])=>({size,qty}));if(p.sizes?.length)return p.sizes.map(size=>({size,qty:null}));return [{size:"Consulte tamanhos",qty:null}]}
+function discountPercent(p){const old=parseMoney(p.originalPrice),now=parseMoney(p.price);return Number.isFinite(old)&&Number.isFinite(now)&&old>now?Math.round((1-now/old)*100):0}
+function renderCatalog(){const term=document.getElementById("searchInput").value.trim().toLocaleLowerCase("pt-BR");const products=cloudProducts.filter(p=>!term||[p.name,p.description,p.category].join(" ").toLocaleLowerCase("pt-BR").includes(term));document.getElementById("productCount").textContent=products.length+" "+(products.length===1?"peça":"peças");if(!products.length){grid.innerHTML=`<div class="empty">${cloudProducts.length?"Nenhuma peça encontrada. Tente outra busca.":"Nenhum produto disponível no momento."}</div>`;return}grid.innerHTML=products.map(p=>{const old=parseMoney(p.originalPrice),now=parseMoney(p.price),off=discountPercent(p),sizes=availableSizes(p);return `<article class="card"><div class="image-wrap"><img class="card-img" loading="lazy" src="${esc(p.imageUrl)}" alt="${esc(p.name)}" onerror="this.style.opacity='.15'">${off?`<span class="discount">${off}% OFF</span>`:""}</div><div class="card-content"><div class="category">${esc(p.category||"ÉLANCE")}</div><h2 class="card-name">${esc(p.name)}</h2><div class="card-desc">${esc(p.description||"Uma escolha especial para expressar seu estilo.")}</div><div class="prices"><span class="current-price">${money(p.price)}</span>${p.originalPrice&&Number.isFinite(old)&&old>now?`<span class="old-price">${money(p.originalPrice)}</span>`:""}</div><div class="stock">${sizes.map(x=>esc(x.size)+(x.qty===null?"":` · ${x.qty} un.`)).join(" / ")}</div><button class="details-btn" data-product="${esc(p.id)}">Ver detalhes</button></div></article>`}).join("")}
+function showDetails(id){const p=cloudProducts.find(x=>x.id===id);if(!p)return;const off=discountPercent(p),sizes=availableSizes(p);document.getElementById("detailImage").src=p.imageUrl;document.getElementById("detailImage").alt=p.name;document.getElementById("detailName").textContent=p.name;document.getElementById("detailDescription").textContent=p.description||"Uma escolha especial para expressar seu estilo.";document.getElementById("detailPrice").textContent=money(p.price);document.getElementById("detailOldPrice").textContent=off?money(p.originalPrice):"";const saving=document.getElementById("detailSaving");saving.hidden=!off;saving.textContent=off?`Você economiza ${money(parseMoney(p.originalPrice)-parseMoney(p.price))} • ${off}% OFF`:"";document.getElementById("detailStock").innerHTML="<strong>Tamanhos disponíveis na loja móvel</strong>"+sizes.map(x=>esc(x.size)+(x.qty===null?"":` — ${x.qty} unidade(s)`)).join(" &nbsp; • &nbsp; ");document.getElementById("detailOverlay").classList.add("show");document.body.style.overflow="hidden"}
+function closeDetails(){document.getElementById("detailOverlay").classList.remove("show");document.body.style.overflow=""}
+function showHome(){currentView="home";document.getElementById("catalogMain").style.display="none";document.getElementById("homeScreen").classList.add("show");renderFeatured()}
+function showCatalog(){currentView="catalog";document.getElementById("homeScreen").classList.remove("show");document.getElementById("catalogMain").style.display="block";renderCatalog()}
+function renderFeatured(){const p=cloudProducts[0];const el=document.getElementById("featured");if(!p){el.innerHTML="<div>Nosso catálogo está sendo atualizado.</div>";return}el.innerHTML=`<img src="${esc(p.imageUrl)}" alt="${esc(p.name)}"><div><div class="kicker">DESTAQUE ÉLANCE</div><h2>${esc(p.name)}</h2><p style="color:var(--muted);line-height:1.5">${esc(p.description||"Uma peça especial para você.")}</p><div class="current-price">${money(p.price)}</div><button class="pill" style="margin-top:15px" id="featuredDetails">Ver detalhes</button></div>`;document.getElementById("featuredDetails").onclick=()=>showDetails(p.id)}
+function resetInactivity(){clearTimeout(inactivityTimer);if(currentView==="catalog")inactivityTimer=setTimeout(()=>showHome(),5*60*1000)}
+["pointerdown","touchstart","keydown","scroll"].forEach(ev=>document.addEventListener(ev,()=>{if(currentView==="catalog")resetInactivity()},{passive:true}));
+document.getElementById("searchInput").addEventListener("input",renderCatalog);
+document.getElementById("catalogGrid").addEventListener("click",e=>{const b=e.target.closest("[data-product]");if(b)showDetails(b.dataset.product)});
 document.getElementById("closeDetail").onclick=closeDetails;
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDetails();});
-document.getElementById("prev").onclick=()=>{index=(index-1+cloudProducts.length)%Math.max(1,cloudProducts.length);renderSlides();startSlides();};
-document.getElementById("next").onclick=()=>{index=(index+1)%Math.max(1,cloudProducts.length);renderSlides();startSlides();};
-document.getElementById("pause").onclick=()=>{paused=!paused;document.getElementById("pause").textContent=paused?"▶":"Ⅱ";startSlides();};
-async function syncCatalog(){
- const status=document.getElementById("syncStatus");
- try{
-  status.textContent="ATUALIZANDO CATÁLOGO…";
-  const rows=await loadSheet();
-  const fresh=normalizeProducts(rows);
-  if(!fresh.length)throw new Error("Nenhum produto disponível. Confira DISPONIVEL=SIM, PRODUTO, VALOR e URL_IMAGEM.");
-  cloudProducts=fresh;localStorage.setItem("elance_cloud_cache",JSON.stringify(cloudProducts));
-  status.textContent="LOJA MÓVEL • "+cloudProducts.length+" PEÇAS A BORDO";
-  if(currentView==="home"){renderSlides();startSlides();}else if(currentView==="catalog")renderCatalog();
- }catch(err){
-  console.error("ÉLANCE catálogo:",err);
-  if(cloudProducts.length)status.textContent="LOJA MÓVEL • "+cloudProducts.length+" PEÇAS (OFFLINE)";
-  else status.textContent="CATÁLOGO INDISPONÍVEL";
- }
-}
-renderSlides();startSlides();syncCatalog();setInterval(syncCatalog,5*60*1000);
+document.getElementById("detailOverlay").addEventListener("click",e=>{if(e.target.id==="detailOverlay")closeDetails()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDetails()});
+document.getElementById("goCatalog").onclick=showCatalog;
+async function syncCatalog(){const status=document.getElementById("syncStatus");try{status.textContent="ATUALIZANDO...";const rows=await loadSheet();const fresh=normalizeProducts(rows);if(!fresh.length)throw new Error("Nenhum produto válido. Confira PRODUTO, VALOR e URL_IMAGEM.");cloudProducts=fresh;localStorage.setItem("elance_cloud_cache",JSON.stringify(cloudProducts));status.textContent=cloudProducts.length+" PEÇAS A BORDO";renderCatalog();if(currentView==="home")renderFeatured()}catch(err){console.error("ÉLANCE:",err);status.textContent=cloudProducts.length?cloudProducts.length+" PEÇAS • OFFLINE":"CATÁLOGO INDISPONÍVEL";document.getElementById("footerStatus").textContent=cloudProducts.length?"Exibindo a última versão salva do catálogo.":err.message;renderCatalog()}}
+renderCatalog();resetInactivity();syncCatalog();setInterval(syncCatalog,5*60*1000);
 </script>
+</div>
 </body>
 </html>
